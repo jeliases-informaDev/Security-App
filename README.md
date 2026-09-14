@@ -1,4 +1,4 @@
-# 📱 ComplyTools - Mobile App
+# 📱 Security - Mobile App
 
 Este repositorio contiene la aplicación móvil del ecosistema ComplyTools, disponible para iOS y Android. Está construida con **React Native, Expo y TypeScript**, compartiendo la misma lógica de negocio (Features) con nuestro ecosistema web para un desarrollo paralelo ágil.
 
