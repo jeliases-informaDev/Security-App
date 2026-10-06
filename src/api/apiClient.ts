@@ -6,7 +6,11 @@ import { Platform } from 'react-native';
 // Si no se define: el emulador de Android llega a tu PC por 10.0.2.2; iOS y web, por localhost.
 // Un celular fisico en la misma red Wi-Fi necesita la IP de tu PC (ej. http://192.168.1.X:8081/api/).
 const hostPorDefecto = Platform.OS === 'android' ? '10.0.2.2' : 'localhost';
-const baseURL = process.env.EXPO_PUBLIC_API_URL || `http://${hostPorDefecto}:8081/api/`;
+// Acepta la URL con o sin "/api" al final (http://192.168.1.50:8081 o http://192.168.1.50:8081/api/).
+const urlConfigurada = process.env.EXPO_PUBLIC_API_URL?.trim();
+const baseURL = urlConfigurada
+  ? `${urlConfigurada.replace(/\/+$/, '').replace(/\/api$/, '')}/api/`
+  : `http://${hostPorDefecto}:8081/api/`;
 
 const apiClient = axios.create({
   baseURL,
