@@ -1,10 +1,15 @@
 import axios from 'axios';
+import { Platform } from 'react-native';
 // import { useAuthStore } from '../store/authStore'; // Lo activaremos cuando creemos el store
 
+// URL del backend. Se define con EXPO_PUBLIC_API_URL en el archivo .env.local (ver .env.example).
+// Si no se define: el emulador de Android llega a tu PC por 10.0.2.2; iOS y web, por localhost.
+// Un celular fisico en la misma red Wi-Fi necesita la IP de tu PC (ej. http://192.168.1.X:8081/api/).
+const hostPorDefecto = Platform.OS === 'android' ? '10.0.2.2' : 'localhost';
+const baseURL = process.env.EXPO_PUBLIC_API_URL || `http://${hostPorDefecto}:8081/api/`;
+
 const apiClient = axios.create({
-  // Para emuladores Android, usa 10.0.2.2 en lugar de localhost
-  // Para dispositivos físicos en la misma red Wi-Fi, usa tu IP local (ej. 192.168.1.X)
-  baseURL: 'http://10.0.2.2:8081/api/',
+  baseURL,
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
