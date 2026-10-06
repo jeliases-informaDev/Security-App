@@ -37,7 +37,7 @@ security-app/
 🛑 ALTO: Requisitos Previos (Instalaciones necesarias)
 Para ejecutar esta aplicación móvil en tu computadora y celular, necesitas:
 
-Node.js (v18 o superior): Descárgalo desde nodejs.org. Esto incluye el gestor de paquetes npm.
+Node.js (v20 o superior): Descárgalo desde nodejs.org. Esto incluye el gestor de paquetes npm.
 
 Visual Studio Code: El editor recomendado para trabajar.
 
@@ -51,8 +51,8 @@ Clonar el proyecto
 Abre tu terminal y descarga el código:
 
 Bash
-git clone <URL_DEL_REPO_AQUI>
-cd security-app
+git clone https://github.com/jeliases-informaDev/Security-App.git
+cd Security-App
 
 
 Paso 2: 
@@ -63,14 +63,18 @@ Ejecuta el siguiente comando para descargar todas las librerías necesarias de R
 Bash
 npm install
 
-Paso 3: 
+Paso 3:
 
-Configurar el enlace con el Backend (Opcional por ahora)
-Crea un archivo llamado .env en la raíz del proyecto. Aquí colocaremos la IP de tu computadora para que el celular pueda conectarse a tu base de datos y backend local:
+Conectar con el Backend (Opcional)
+La app necesita el backend corriendo en el puerto `8081`. Levántalo desde el repositorio **Security-Backend** (`docker compose up -d --build`; su README lo explica en 3 comandos).
+
+Por defecto la app ya sabe dónde está: `http://10.0.2.2:8081/api/` en el emulador de Android y `http://localhost:8081/api/` en iOS y navegador. **No tienes que configurar nada** para esos casos.
+
+Solo con un **celular físico** (Expo Go) `localhost` no funciona: debes usar la IP IPv4 de tu PC en la red Wi-Fi (`ipconfig`). Crea un archivo llamado `.env.local` (no `.env`: `.env.local` sí está ignorado por git; sale como ejemplo en `.env.example`):
 
 Fragmento de código
 EXPO_PUBLIC_API_URL=http://<TU_DIRECCION_IP_LOCAL>:8081
-(Nota importante: En Expo, para probar en un celular físico, localhost no funciona. Debes usar la dirección IP IPv4 de tu PC en la red Wi-Fi).
+(Con o sin `/api` al final funciona. Después reinicia con `npx expo start -c`. Tu PC y el celular deben estar en la misma red Wi-Fi; si Windows pregunta por el firewall al abrir el puerto 8081, permítelo para redes privadas.)
 
 Paso 4: 
 
@@ -105,3 +109,5 @@ Bash
 git add .
 git commit -m "feat: agrega estructura visual del login"
 git push origin feature/pantalla-login
+
+> Esta versión de Expo (SDK 57) cambió respecto a versiones anteriores: ante cualquier duda consulta https://docs.expo.dev/versions/v57.0.0/
